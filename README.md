@@ -11,6 +11,14 @@ _NeuraScale_, the fancy name we gave our project, is basically a Super Resolutio
 - Matplotlib
 - MS COCO unlabeled2017 Dataset (for training)
 
+## Commands
+```
+pip install matplotlib scipy numpy Pillow
+apt-get update
+apt-get install python-tk
+python srgan.py -p mj-dance2.png 
+```
+
 ## Directory Tree Structure
 ```
 /datasets

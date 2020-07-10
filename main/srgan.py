@@ -3,7 +3,7 @@ from tensorflow import keras
 import datetime
 import matplotlib.pyplot as plt
 import sys
-import shutil
+import shutil, tqdm
 from data_loader import DataLoader
 import numpy as np
 import os
@@ -12,6 +12,8 @@ import glob
 import argparse
 from preprocessing import ImageSlicer
 from PIL import Image, ImageEnhance
+
+
 parser = argparse.ArgumentParser()
 parser.add_argument("--rem", '-r', help="delete files in directories saves and images",
                     action="store_true")
@@ -96,7 +98,7 @@ class SRGAN(keras.Model):
         vgg.outputs = [vgg.layers[9].output]
 
         img = keras.Input(shape=self.hr_shape)
-
+        print(img.shape)
         # Extract image features
         img_features = vgg(img)
 
@@ -174,8 +176,9 @@ class SRGAN(keras.Model):
         return keras.Model(d0, validity)
 
     def train(self, epochs, batch_size=1, sample_interval=50):
+        print("Start training with a batch size of {} and {} epochs".format(batch_size,epochs))
         start_time = datetime.datetime.now()
-        for epoch in range(epochs):
+        for epoch in tqdm.trange(epochs):
 
             imgs_hr, imgs_lr = self.data_loader.load_data(batch_size)
             fake_hr = self.generator.predict(imgs_lr)
@@ -345,4 +348,4 @@ if __name__ == '__main__':
     if args.pred is not None:
         gan.batch_image(args.pred)
     else:
-        gan.train(epochs=30000, batch_size=1, sample_interval=50)
+        gan.train(epochs=30000, batch_size=8, sample_interval=50)

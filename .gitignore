@@ -102,3 +102,7 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+main/__pycache_
+saves
+*.jpg
+*.png

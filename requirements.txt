@@ -1,6 +1,6 @@
-tensorflow-gpu==2.0.0
-matplotlib
-numpy
-scipy
-tqdm
-Pillow
+tensorflow-gpu==2.0.0b1
+matplotlib==3.2.2
+numpy==1.19.0
+scipy==0.19.1
+tqdm==4.47.0
+Pillow==7.2.0
